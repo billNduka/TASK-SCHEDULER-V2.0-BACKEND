@@ -3,21 +3,19 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from models.models import User, Task
+from routers import auth_routes
+from database import get_db
 
 app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db    
-    finally:
-        db.close()
 
 @app.get("/")
 async def root():
     return {"message": "Hello, World!"}
+
+app.include_router(auth_routes.router)
 
 @app.get("/health")
 def health_check(db: Session = Depends(get_db)):

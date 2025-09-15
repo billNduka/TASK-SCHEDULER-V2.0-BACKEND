@@ -26,7 +26,7 @@ class Task(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User", back_populates="tasks")
+    owner = relationship("User", back_populates="tasks")
 
     parent_id = Column(Integer, ForeignKey("tasks.id"), nullable=True)
     subtasks = relationship("Task")
