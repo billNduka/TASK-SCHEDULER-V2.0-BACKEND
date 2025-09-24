@@ -22,6 +22,7 @@ class Task(Base):
     description = Column(Text, nullable=True)
     completed = Column(Boolean, default=False)
     due_date = Column(DateTime, nullable=True)
+    category = Column(String, nullable=False, default="To-Do")
     completed_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
