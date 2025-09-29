@@ -4,7 +4,7 @@ from schemas.user import UserCreate, UserLogin, UserOut
 from sqlalchemy.orm import Session
 from database import get_db
 
-router = APIRouter()
+router = APIRouter(prefix="/auth", tags=["Auth"])
 
 @router.post("/register", response_model=UserOut)
 def register(user: UserCreate, db: Session = Depends(get_db)):

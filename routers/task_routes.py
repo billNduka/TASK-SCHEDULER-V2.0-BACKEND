@@ -38,4 +38,7 @@ def update_task(task_id: int, task_data: TaskUpdate, db: Session = Depends(get_d
 def delete_task(task_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(auth_controllers.get_current_user)):
     return task_controller.delete_task(db, task_id, current_user.id)
 
-
+#PATCH update completion status
+@router.patch("/{task_id}", response_model=Task)
+def update_completion_status(task_id:int, db:Session = Depends(get_db), current_user: models.User = Depends(auth_controllers.get_current_user)):
+    return task_controller.update_completion_status(db, task_id, current_user.id)

@@ -1,6 +1,13 @@
+from enum import Enum
 from pydantic import BaseModel
 import datetime
-from typing import Optional, List
+from typing import Optional, List, Literal
+
+
+class RecurrencePattern(str, Enum):
+    daily = "daily"
+    weekly = "weekly"
+    monthly = "monthly"
 
 class TaskBase(BaseModel):
     title: str
@@ -8,6 +15,12 @@ class TaskBase(BaseModel):
     due_date: Optional[datetime.datetime] = None
     parent_id: Optional[int] = None
     category: str = "To-Do"
+    scheduled_at: Optional[datetime.datetime] = None
+    is_recurring: Optional[bool] = False
+    recurrence_pattern: Optional[RecurrencePattern] = None
+    quota: Optional[int] = None
+    progress: Optional[int] = 0
+    email_reminder: Optional[bool] = False
 
 
 class TaskCreate(TaskBase):
