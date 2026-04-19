@@ -15,7 +15,7 @@ class TaskBase(BaseModel):
     due_date: Optional[datetime.datetime] = None
     parent_id: Optional[int] = None
     category: str = "To-Do"
-    scheduled_at: Optional[datetime.datetime] = None
+    scheduled_for: Optional[datetime.datetime] = None
     is_recurring: Optional[bool] = False
     recurrence_pattern: Optional[RecurrencePattern] = None
     quota: Optional[int] = None
@@ -41,5 +41,5 @@ class Task(TaskBase):
     user_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 

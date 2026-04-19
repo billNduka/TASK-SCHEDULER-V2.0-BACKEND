@@ -45,7 +45,7 @@ def update_task(db: Session, task_id: int, task_data: TaskUpdate, user_id: int):
     for key, value in task_data.dict(exclude_unset=True).items():
         setattr(task, key, value)
 
-    if task.complete and task.completed:
+    if task.is_recurring and task.completed:
         if task.recurrence_pattern == "daily":
             task.due_date += datetime.timedelta(days=1)
         elif task.recurrence_pattern == "weekly":
